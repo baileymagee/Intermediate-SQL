@@ -21,15 +21,15 @@ CREATE TABLE cat_owners (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   cat_id INTEGER,
   owner_id INTEGER,
-  FOREIGN KEY (cat_id) REFERENCES cats(id),
-  FOREIGN KEY (owner_id) REFERENCES owners(id)
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE,
+  FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
 );
 
 CREATE TABLE toys (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT,
   cat_id INTEGER,
-  FOREIGN KEY (cat_id) REFERENCES cats(id)
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE
 );
 
 INSERT INTO owners
@@ -81,16 +81,19 @@ VALUES
   (7, 'Cheetos'),
   (8, 'Crinkle Ball'),
   (8, 'Yarn');
+-- SELECT cats.name, owners.first_name FROM cat_owners
+-- JOIN cats ON (cat_owners.cat_id = cats.id)
+-- JOIN owners ON (cat_owners.owner_id = owners.id)
+-- WHERE owners.first_name = 'Hermione';
 
+-- SELECT owners.first_name, toys.name FROM cats
+-- JOIN cat_owners ON (cat_owners.cat_id = cats.id)
+-- JOIN owners ON (cat_owners.owner_id = owners.id)
+-- JOIN toys ON (toys.cat_id = cats.id)
+-- WHERE owners.first_name = 'Hermione';
 
-
-SELECT cats.name, owners.first_name FROM cat_owners
-JOIN cats ON (cat_owners.cat_id = cats.id)
-JOIN owners ON (cat_owners.owner_id = owners.id)
-WHERE owners.first_name = 'Hermione';
-
-SELECT cats.name, owners.first_name, toys.name FROM cat_owners
-JOIN cats ON (cat_owners.cat_id = cats.id)
-JOIN owners ON (cat_owners.owner_id = owners.id)
-JOIN toys ON (toys.cat_id = cats.id)
-WHERE owners.first_name = 'Hermione';
+-- SELECT * FROM owners;
+-- SELECT * FROM cat_owners;
+-- DELETE FROM owners WHERE first_name='Hermione';
+-- SELECT * FROM owners;
+-- SELECT * FROM cat_owners;
