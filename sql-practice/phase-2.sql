@@ -81,3 +81,16 @@ VALUES
   (7, 'Cheetos'),
   (8, 'Crinkle Ball'),
   (8, 'Yarn');
+
+
+
+SELECT cats.name, owners.first_name FROM cat_owners
+JOIN cats ON (cat_owners.cat_id = cats.id)
+JOIN owners ON (cat_owners.owner_id = owners.id)
+WHERE owners.first_name = 'Hermione';
+
+SELECT cats.name, owners.first_name, toys.name FROM cat_owners
+JOIN cats ON (cat_owners.cat_id = cats.id)
+JOIN owners ON (cat_owners.owner_id = owners.id)
+JOIN toys ON (toys.cat_id = cats.id)
+WHERE owners.first_name = 'Hermione';
